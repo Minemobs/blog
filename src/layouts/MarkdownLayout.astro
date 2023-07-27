@@ -1,0 +1,34 @@
+---
+import BaseLayout from './Layout.astro'
+type Frontmatter = {
+    title: string;
+    description?: string;
+}
+const frontmatter = Astro.props.frontmatter as Frontmatter;
+---
+<script>
+    document.getElementById('header')?.classList.remove("rounded-b-xl");
+</script>
+<html>
+    <BaseLayout title={frontmatter.title}>
+        <div class="flex flex-1 flex-col">
+            <div class="grid grid-cols-3 py-5 px-10 rounded-b-xl bg-[#20232b]">
+                <span class="text-lg">Author: minemobs</span>
+                <h1 class="text-2xl text-center font-bold">{frontmatter.title}</h1>
+            </div>
+            <div class="contents justify-center items-center">
+                <div class="flex-1 w-full prose lg:prose-xl prose-invert prose-img:rounded-xl prose-a:text-blue-600 bg-[#1e2128] shadow-lg shadow-slate-800 rounded-lg mx-auto px-5 my-10">
+                    <div>
+                        <slot />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </BaseLayout>
+</html>
+
+<style>
+	* {
+		color: white;
+	}
+</style>
