@@ -1,0 +1,58 @@
+---
+import Icon from 'astro-icon';
+import ShikiCode from 'astro/components/Code.astro'
+import type {Lang} from 'shiki';
+interface Props {
+    lang: Lang,
+    inline?: boolean,
+    file: string,
+    filename?: string,
+};
+
+const { lang, file, inline = false, filename = file.split("/").at(-1) } = Astro.props;
+function getLangIcon() {
+    switch (file.split('.')[1]) {
+        case 'py':
+        case 'python':
+            return 'vscode-icons:file-type-python'
+        case 'java':
+            return 'logos:java'
+        case 'js':
+        case 'javascript':
+            return 'vscode-icons:file-type-js-official'
+        case 'ts':
+        case 'typescript':
+            return 'vscode-icons:file-type-typescript-official'
+        case 'kt':
+        case 'kotlin':
+            return 'vscode-icons:file-type-kotlin'
+        case 'rust':
+            return 'noto-v1:crab'
+        default:
+            return undefined
+    }
+}
+const icon = getLangIcon();
+const url = `http://localhost:3000/${file}`
+const res = await fetch(url);
+const code = await res.text();
+---
+
+<div class="codeblock">
+    <div class="rounded-md bg-slate-800 w-fit px-5 grid gird-cols-2 grid-flow-col ml-2 shadow-md shadow-slate-950">
+        {icon !== undefined && <Icon name={icon} size={'1em'} class={"my-auto"}/>}
+        <span class="mx-5 text-center">{filename}</span>
+    </div>
+    <ShikiCode code={code} lang={lang} inline={inline}/>
+</div>
+
+<script>
+    const els = document.getElementsByClassName("codeblock");
+    for(let i = 0; i < els.length; i++) {
+        const codeblock = els[i] as HTMLDivElement;
+        const el = codeblock.children.item(1) as HTMLPreElement | undefined;
+        if(el == undefined) break;
+        el.style.marginTop = "0";
+        el.classList.add("shadow-sm", "shadow-slate-950");
+    }
+</script>
