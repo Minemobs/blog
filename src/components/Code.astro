@@ -33,7 +33,7 @@ function getLangIcon() {
     }
 }
 const icon = getLangIcon();
-const url = `http://localhost:3000/${file}`
+const url = `${Astro.url.origin}/${file}`
 const res = await fetch(url);
 const code = await res.text();
 ---
