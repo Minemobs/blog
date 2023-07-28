@@ -3,7 +3,7 @@ interface Props {
 	title: string;
 	body: string;
 	file: string;
-	image?: string;
+	image?: string | undefined;
 }
 
 const { file, title, body, image } = Astro.props;

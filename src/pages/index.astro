@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 interface Frontmatter {
-	title: string,
+	title: string;
 	description?: string;
+	image?: string;
 }
 const posts = await Astro.glob<Frontmatter>("./blog/*.mdx");
 ---
@@ -12,7 +13,7 @@ const posts = await Astro.glob<Frontmatter>("./blog/*.mdx");
 	<main class="flex flex-1">
 		<div class="flex flex-1 justify-center items-center">
 			<ul role="list" class="grid grid-cols-2 items-center justify-center gap-10 md:grid-cols-2 md:gap-20 lg:grid-cols-3">
-				{posts.map(post => <Card file={post.url!} title={post.frontmatter.title} body={post.frontmatter.description ?? "No description for now."}/>)}
+				{posts.map(post => <Card file={post.url!} title={post.frontmatter.title} body={post.frontmatter.description ?? "No description for now."} image={post.frontmatter.image}/>)}
 			</ul>
 		</div>
 	</main>

@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-
 import tailwind from "@astrojs/tailwind";
+
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,5 +10,9 @@ export default defineConfig({
   scopedStyleStrategy: 'class',
   vite: {
     assetsInclude: ['**/*.kt']
-  }
+  },
+  output: "server",
+  adapter: node({
+    mode: "standalone"
+  })
 });
