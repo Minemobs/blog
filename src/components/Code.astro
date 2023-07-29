@@ -39,10 +39,13 @@ const res = await fetch(url);
 const code = await res.text();
 ---
 
-<div class="codeblock">
-    <div class="rounded-md bg-slate-800 w-fit px-5 grid gird-cols-2 grid-flow-col ml-2 shadow-md shadow-slate-950">
+<div class="codeblock relative">
+    <div class="rounded-md bg-slate-800 w-fit px-5 grid grid-flow-col ml-2 shadow-md shadow-slate-950">
         {icon !== undefined && <Icon name={icon} size={'1em'} class={"my-auto"}/>}
         <span class="mx-5 text-center">{filename}</span>
+    </div>
+    <div class="absolute overflow-hidden top-14 right-5 clipboard-div">
+        <Icon name="system-uicons:clipboard" size={'2em'} class={"hover:shadow-md hover:text-blue-500"}>
     </div>
     <ShikiCode code={code} lang={lang} inline={inline}/>
 </div>
@@ -51,9 +54,15 @@ const code = await res.text();
     const els = document.getElementsByClassName("codeblock");
     for(let i = 0; i < els.length; i++) {
         const codeblock = els[i] as HTMLDivElement;
-        const el = codeblock.children.item(1) as HTMLPreElement | undefined;
+        const el = codeblock.children.item(2) as HTMLPreElement | undefined;
         if(el == undefined) break;
         el.style.marginTop = "0";
         el.classList.add("shadow-sm", "shadow-slate-950");
     }
+
+    document.querySelectorAll('div.clipboard-div').forEach(el => {
+        el.addEventListener('click', () => {
+            navigator.clipboard.writeText(el.parentElement?.children.item(2)?.textContent!);
+        });
+    });
 </script>
