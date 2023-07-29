@@ -10,8 +10,8 @@ interface Props {
 };
 
 const { lang, file, inline = false, filename = file.split("/").at(-1) } = Astro.props;
-function getLangIcon() {
-    switch (file.split('.')[1]) {
+function getLangIcon(lang: string | undefined) {
+    switch (lang) {
         case 'py':
         case 'python':
             return 'vscode-icons:file-type-python'
@@ -33,8 +33,8 @@ function getLangIcon() {
             return undefined
     }
 }
-const icon = getLangIcon();
-const url = `${Astro.url.origin}/${file}`
+const icon = getLangIcon(file.split('.')[1]) ?? getLangIcon(filename?.split('.')[1]);
+const url = file.startsWith("https://") ? file : `${Astro.url.origin}/${file}`
 const res = await fetch(url);
 const code = await res.text();
 ---
