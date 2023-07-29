@@ -12,7 +12,7 @@ const posts = await Astro.glob<Frontmatter>("./blog/*.mdx");
 <Layout title="Minemobs's blog">
 	<main class="flex flex-1">
 		<div class="flex flex-1 justify-center items-center">
-			<ul role="list" class="grid grid-cols-2 items-center justify-center gap-10 md:grid-cols-2 md:gap-20 lg:grid-cols-3">
+			<ul role="list" class="mx-5 my-2 grid grid-cols-2 items-center justify-center gap-10 md:grid-cols-2 md:gap-20 lg:grid-cols-3">
 				{posts.map(post => <Card file={post.url!} title={post.frontmatter.title} body={post.frontmatter.description ?? "No description for now."} image={post.frontmatter.image}/>)}
 			</ul>
 		</div>
