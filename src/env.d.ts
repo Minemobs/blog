@@ -1,2 +1,2 @@
 /// <reference types="astro/client" />
-declare module "astro-imagetools/components"
+/// <reference types="@astrojs/image/client" />
