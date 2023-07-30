@@ -44,10 +44,10 @@ const code = await res.text();
         {icon !== undefined && <Icon name={icon} size={'1em'} class={"my-auto"}/>}
         <span class="mx-5 text-center">{filename}</span>
     </div>
-    <div class="absolute overflow-hidden top-14 right-5 clipboard-div rounded-md bg-purple-600 bg-opacity-40 p-3 shadow-sm shadow-slate-400 pointer-events-none hover:top-12 hover:right-3" onclick="navigator.clipboard.writeText(this.parentElement.children.item(2).textContent)">
-        <Icon name="system-uicons:clipboard" size={'2em'} class={"hover:text-black hover:w-[2.2em] hover:h-[2.2em] pointer-events-auto"}>
+    <div class="absolute overflow-hidden top-14 right-5 clipboard-div rounded-md bg-purple-600 bg-opacity-40 p-3 pr-3 shadow-sm shadow-slate-400 pointer-events-none hover:top-12 hover:right-3 transition-[top,right]" onclick="navigator.clipboard.writeText(this.parentElement.children.item(2).textContent)">
+        <Icon name="system-uicons:clipboard" size={'2em'} class={"hover:text-black transition-[color,width,height] duration-700 hover:w-[2.2em] hover:h-[2.2em] pointer-events-auto"}>
     </div>
-    <ShikiCode code={code} lang={lang} inline={inline}/>
+    <ShikiCode code={code} lang={lang} inline={inline} />
 </div>
 
 <script>
