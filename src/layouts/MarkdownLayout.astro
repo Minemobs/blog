@@ -10,7 +10,7 @@ const frontmatter = Astro.props.frontmatter as Frontmatter;
     document.getElementById('header')?.classList.remove("rounded-b-xl");
 </script>
 <html>
-    <BaseLayout title={frontmatter.title}>
+    <BaseLayout title={frontmatter.title} description={frontmatter.description}>
         <div class="flex flex-1 flex-col">
             <div class="grid grid-cols-3 py-5 px-10 rounded-b-xl bg-[#20232b]">
                 <span class="text-lg">Author: minemobs</span>
